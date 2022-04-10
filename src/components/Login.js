@@ -1,12 +1,24 @@
 import React, { useState } from "react";
-//import { Link, Navigate } from "react-router-dom";
-import MainLogin from "./MainLogin";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
+  const history = useNavigate();
+
   const [uName, setUName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login, setLogin] = useState(true);
+
+  const handleClick = () => {
+    if (email === "" || password === "" || uName === "") {
+      alert("Kindly complete the registration form");
+    } else if ((email, password, uName)) {
+      localStorage.setItem("Email", JSON.stringify(email));
+      localStorage.setItem("UserName", JSON.stringify(uName));
+      localStorage.setItem("Password", JSON.stringify(password));
+      history("/login", { replace: true });
+    } else {
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,73 +26,66 @@ export default function Login() {
     localStorage.setItem("Email", JSON.stringify(email));
     localStorage.setItem("UserName", JSON.stringify(uName));
     localStorage.setItem("Password", JSON.stringify(password));
-
-    console.log("saved in lS");
-    console.log(email);
-    console.log(uName);
-    console.log(password);
-    setLogin(!login);
-  };
-
-  const handleClick = () => {
-    setLogin(!login);
   };
 
   return (
     <div>
-      {login ? (
-        <form
-          className="text-center"
-          onSubmit={handleSubmit}
-          style={{ width: "30%", margin: "20px auto" }}
-        >
-          <h1>Register</h1>
-          <div className="form-group" style={{ margin: "20px auto" }}>
-            <label>UserName</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter User name"
-              onChange={(e) => setUName(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group" style={{ margin: "20px auto" }}>
-            <label>Email</label>
-            <input
-              type="email"
-              className="form-control"
-              placeholder="Enter Email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group" style={{ margin: "20px auto" }}>
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Enter Password"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+      <form
+        className="text-center"
+        onSubmit={handleSubmit}
+        style={{ width: "30%", margin: "20px auto" }}
+      >
+        <h1>Register</h1>
+        <div className="form-group" style={{ margin: "20px auto" }}>
+          <label>UserName</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Enter User name"
+            onChange={(e) => setUName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group" style={{ margin: "20px auto" }}>
+          <label>Email</label>
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Enter Email"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group" style={{ margin: "20px auto" }}>
+          <label>Password</label>
+          <input
+            type="password"
+            className="form-control"
+            placeholder="Enter Password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-            <button
-              type="submit"
-              className="btn btn-dark btn-lgbtn-block"
-              style={{ margin: "20px auto" }}
-            >
-              Register
-            </button>
-
-            <p onClick={handleClick} style={{ cursor: "pointer" }}>
-              Already registered? Login
-            </p>
-          </div>
-        </form>
-      ) : (
-        <MainLogin />
-      )}
+          <button
+            type="submit"
+            className="btn btn-dark btn-lgbtn-block"
+            style={{ margin: "20px auto" }}
+            onClick={handleClick}
+          >
+            Register
+          </button>
+          <Link
+            to="/login"
+            style={{
+              cursor: "pointer",
+              textDecoration: "none",
+              color: "black",
+            }}
+          >
+            <p>Already registered? Login</p>
+          </Link>
+        </div>
+      </form>
     </div>
   );
 }
