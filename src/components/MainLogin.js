@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SELECT_VALUE_KEY = "MySelectValue";
 
@@ -84,6 +84,16 @@ export default function MainLogin() {
         >
           Login
         </button>
+        <Link
+          to="/"
+          style={{
+            cursor: "pointer",
+            textDecoration: "none",
+            color: "black",
+          }}
+        >
+          <p>Create Account</p>
+        </Link>
       </form>
     </div>
   );
