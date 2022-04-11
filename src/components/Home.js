@@ -14,7 +14,6 @@ const getDataFromLS = () => {
 };
 
 function Home() {
-  
   const [userData, setUserData] = useState(getDataFromLS());
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -53,7 +52,6 @@ function Home() {
     setBloodGroup("");
   };
 
-  
   // delete data
   const deleteData = (age) => {
     const filteredData = userData.filter((element, index) => {
@@ -62,7 +60,6 @@ function Home() {
     setUserData(filteredData);
   };
 
-  
   //saving data to local storage
   useEffect(() => {
     localStorage.setItem("userData", JSON.stringify(userData));
@@ -85,9 +82,6 @@ function Home() {
                 Log out <br />
                 <b>{localStorage.getItem("Email")}</b>
               </li>
-            </Link>
-            <Link to="/login" className="nav-links addUser">
-              <li> Add User </li>
             </Link>
           </ul>
         </div>
